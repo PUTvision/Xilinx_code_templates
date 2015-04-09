@@ -16,6 +16,8 @@ static XScuTimer *TimerInstancePtr = &Timer;
 static volatile u32 startTime = 0;
 static volatile u32 stopTime = 0;
 
+static const float TIMER_FREQ_IN_MHZ = 333.0F;
+
 int TIMER_init(u16 deviceId)
 {
 	/*
@@ -32,7 +34,6 @@ int TIMER_init(u16 deviceId)
 
 	u8 val;
 	val = XScuTimer_GetPrescaler(TimerInstancePtr);
-	xil_printf("SCU timer prescaler is %d\r\n", val);
 
 	/*
 	 * Load the timer counter register.
@@ -72,9 +73,9 @@ u32 TIMER_getCurrentValue(void)
 float TIMER_getTimeStartToValueInUs(u32 timerValue)
 {
 	// the counter is counting down
-	int timeInClockCycles = startTime - timerValue;
+	u32 timeInClockCycles = startTime - timerValue;
 
-	float timeInUs = (float)timeInClockCycles * (1.0F / 333.0F);
+	float timeInUs = (float)timeInClockCycles * (1.0F / TIMER_FREQ_IN_MHZ);
 
 	return timeInUs;
 }
@@ -82,19 +83,16 @@ float TIMER_getTimeStartToValueInUs(u32 timerValue)
 float TIMER_getTimeValueToStopInUs(u32 timerValue)
 {
 	// the counter is counting down
-	int timeInClockCycles = timerValue - stopTime;
+	u32 timeInClockCycles = timerValue - stopTime;
 
-	float timeInUs = (float)timeInClockCycles * (1.0F / 333.0F);
+	float timeInUs = (float)timeInClockCycles * (1.0F / TIMER_FREQ_IN_MHZ);
 
 	return timeInUs;
 }
 
 float TIMER_getTimeInMs(void)
 {
-	// the counter is counting down
-	int timeInClockCycles = startTime - stopTime;
-
-	float timeInMs = (float)timeInClockCycles * (1.0F / 333000.0F);
+	float timeInMs = TIMER_getTimeInUs() * (1.0F / 1000.0F);
 
 	return timeInMs;
 }
@@ -102,18 +100,17 @@ float TIMER_getTimeInMs(void)
 float TIMER_getTimeInUs(void)
 {
 	// the counter is counting down
-	int timeInClockCycles = startTime - stopTime;
+	u32 timeInClockCycles = startTime - stopTime;
 
-	float timeInUs = (float)timeInClockCycles * (1.0F / 333.0F);
+	float timeInUs = (float)timeInClockCycles * (1.0F / TIMER_FREQ_IN_MHZ);
 
 	return timeInUs;
 }
 
-int TIMER_getTimeInClockCycles(void)
+u32 TIMER_getTimeInClockCycles(void)
 {
 	// the counter is counting down
-	int timeInClockCycles = startTime - stopTime;
+	u32 timeInClockCycles = startTime - stopTime;
 
 	return timeInClockCycles;
 }
-

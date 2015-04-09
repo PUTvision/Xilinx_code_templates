@@ -30,7 +30,7 @@ float TIMER_getTimeInMs(void);
 
 float TIMER_getTimeInUs(void);
 
-int TIMER_getTimeInClockCycles(void);
+u32 TIMER_getTimeInClockCycles(void);
 
 #ifdef __cplusplus
 }
