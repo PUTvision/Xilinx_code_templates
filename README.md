@@ -7,5 +7,7 @@ http://www.vision.put.poznan.pl/?p=182
 # Desciption
 
 * /app_hello_world/ - simple hello world application for Zedboard
+* /app_zynq_ps7_timer/ - example app that uses hardware timer through C and C++ style driver
 * /linker_scripts/zynq_ddr_10MB_10MB/ - example linker script for Zedboard with 10 MB sections sizes
 * /platform/ - code for cache and UART initializaion (copied from example C project in Xilinx SDK)
+* /zynq_ps7_timer/ - C and C++ drivers for Zynq PS timer
