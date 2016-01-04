@@ -4,6 +4,9 @@ Collection of simple examples and drivers for peripherals for Xilinx processors 
 Guide on how to use C++ for bare metal apps on Zynq (Zedboard) can be found here:
 http://www.vision.put.poznan.pl/?p=182
 
+Guide on how to write drivers for bare metal Xilinx Zynq (Zedboard) in C and C++ can be found here:
+http://www.vision.put.poznan.pl/?p=246
+
 # Desciption
 
 * /app_hello_world/ - simple hello world application for Zedboard
